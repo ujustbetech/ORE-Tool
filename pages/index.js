@@ -13,7 +13,7 @@ const FeedbackForm = () => {
     email: "",
     feedbackOption: "",
   });
-    
+
   const options = [
     "Energy Saving BLDC Smart Fans",
     "Turnkey Interiors",
@@ -62,10 +62,12 @@ const FeedbackForm = () => {
   return (
     <section className="feedbackContainer">
       <div className="feedback_logo">
+      <img src="/images/srenlogo.jpg" alt="Logo" className="sirenlogo"/>
         <img src="/ujustlogo.png" alt="Logo" />
+      
       </div>
       <div className="feedback-form-container">
-        <h2 className="feedback-form-title">Feedback Form</h2>
+        <h2 className="feedback-form-title">Data Capturing Tool</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label>First Name</label>
