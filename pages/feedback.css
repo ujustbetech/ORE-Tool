@@ -26,12 +26,24 @@
 
 /* Logo */
 .feedback_logo {
-  width: 80px;
+  width: 100%;
+  display: flex
+;
   /* margin-bottom: 20px; */
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  box-sizing: border-box;
 }
 
+
 .feedback_logo img {
-  width: 100%;
+  width: 80px;
+}
+
+img.sirenlogo {
+  width: 120px;
 }
 .footers {
   padding: 10px;
