@@ -10,8 +10,8 @@ const AdminLogin = () => {
   const router = useRouter();
 
   // Predefined admin credentials
-  const ADMIN_PHONE = "0987654321"; // Replace with actual phone number
-  const ADMIN_PASSWORD = "admin123"; // Replace with actual password
+  const ADMIN_PHONE = "9820003881 "; // Replace with actual phone number
+  const ADMIN_PASSWORD = "admin1234"; // Replace with actual password
 
   const handleLogin = (e) => {
     e.preventDefault();
