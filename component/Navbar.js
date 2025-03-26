@@ -20,13 +20,13 @@ const Navbar = (props) => {
                         {/*  Event */}
                       
                         <li>
-                            <Link href="/admin/event/addEvent">
+                            <Link href="">
                                 <span className="icons"><MdEventAvailable /></span>
-                                <span className="linklabel">Orbitors</span>
+                                <span className="linklabel">Users</span>
                                 <span className="submenuIcon"><MdOutlineKeyboardArrowDown /></span>
                             </Link>
                             <ul>
-                                <li><Link href="/admin/addusers">Add Registered Users</Link></li>
+                                <li><Link href="/admin/addusers">Add Users</Link></li>
                                 <li><Link href="/admin/registeredusers">List of Registered Users</Link></li>
                             </ul>
                         </li>

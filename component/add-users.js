@@ -9,23 +9,41 @@ const AddUserPage = () => {
     lastName: "",
     phoneNumber: "",
     email: "",
-    feedbackOption: "",
+    feedbackOptions: [],
   });
+
+  const productOptions = [
+    "Energy Saving BLDC Smart Fans",
+    "Turnkey Interiors",
+    "Keshar Shrikhand",
+    "CKP Sode (Dried Prawns)",
+    "CKP Tel Poli - Puranpoli",
+  ];
 
   const handleInputChange = (e) => {
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
   };
 
+  const handleCheckboxChange = (e) => {
+    const { value, checked } = e.target;
+    setNewUser((prevState) => ({
+      ...prevState,
+      feedbackOptions: checked
+        ? [...prevState.feedbackOptions, value]
+        : prevState.feedbackOptions.filter((option) => option !== value),
+    }));
+  };
+
   const handleRegisterUser = async (e) => {
     e.preventDefault();
-    if (!newUser.firstName || !newUser.lastName || !newUser.phoneNumber || !newUser.email) {
-      alert("Please fill in all required fields.");
+    if (!newUser.firstName || !newUser.lastName || !newUser.phoneNumber || !newUser.email || newUser.feedbackOptions.length === 0) {
+      alert("Please fill in all required fields and select at least one product.");
       return;
     }
 
     try {
       await addDoc(collection(db, "useregistration"), newUser);
-      setNewUser({ firstName: "", lastName: "", phoneNumber: "", email: "", feedbackOption: "" });
+      setNewUser({ firstName: "", lastName: "", phoneNumber: "", email: "", feedbackOptions: [] });
       alert("User registered successfully!");
     } catch (error) {
       console.error("Error registering user:", error);
@@ -40,74 +58,42 @@ const AddUserPage = () => {
           <li className="form-row">
             <div className="multipleitem">
               <h4>Mobile Number:<sup>*</sup></h4>
-              <input
-                type="text"
-                name="phoneNumber"
-                placeholder="Phone Number"
-                value={newUser.phoneNumber}
-                onChange={handleInputChange}
-                required
-              />
+              <input type="text" name="phoneNumber" placeholder="Phone Number" value={newUser.phoneNumber} onChange={handleInputChange} required />
             </div>
           </li>
           <li className="form-row">
             <div className="multipleitem">
               <h4>First Name:<sup>*</sup></h4>
-              <input
-                type="text"
-                name="firstName"
-                placeholder="First Name"
-                value={newUser.firstName}
-                onChange={handleInputChange}
-                required
-              />
+              <input type="text" name="firstName" placeholder="First Name" value={newUser.firstName} onChange={handleInputChange} required />
             </div>
           </li>
           <li className="form-row">
             <div className="multipleitem">
               <h4>Last Name:<sup>*</sup></h4>
-              <input
-                type="text"
-                name="lastName"
-                placeholder="Last Name"
-                value={newUser.lastName}
-                onChange={handleInputChange}
-                required
-              />
+              <input type="text" name="lastName" placeholder="Last Name" value={newUser.lastName} onChange={handleInputChange} required />
             </div>
           </li>
           <li className="form-row">
             <div className="multipleitem">
               <h4>Email:<sup>*</sup></h4>
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={newUser.email}
-                onChange={handleInputChange}
-                required
-              />
+              <input type="email" name="email" placeholder="Email" value={newUser.email} onChange={handleInputChange} required />
             </div>
           </li>
           <li className="form-row">
             <div className="multipleitem">
-              <h4>Product:<sup>*</sup></h4>
-              <select
-                name="feedbackOption"
-                value={newUser.feedbackOption}
-                onChange={handleInputChange}
-                required
-              >
-           
-  <option value="">Select Product</option>
-  <option value="Energy Saving BLDC Smart Fans">Energy Saving BLDC Smart Fans</option>
-  <option value="Turnkey Interiors">Turnkey Interiors</option>
-  <option value="Keshar Shrikhand">Keshar Shrikhand</option>
-  <option value="CKP Sode (Dried Prawns)">CKP Sode (Dried Prawns)</option>
-  <option value="CKP Tel Poli - Puranpoli">CKP Tel Poli - Puranpoli</option>
-</select>
-
-            
+              <h4>Products:<sup>*</sup></h4>
+              {productOptions.map((option, index) => (
+                <div key={index}>
+                  <input
+                    type="checkbox"
+                    name="feedbackOptions"
+                    value={option}
+                    checked={newUser.feedbackOptions.includes(option)}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label>{option}</label>
+                </div>
+              ))}
             </div>
           </li>
           <li className="form-row">

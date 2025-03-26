@@ -37,7 +37,7 @@ const UserListPage = () => {
             <th>Last Name</th>
             <th>Phone Number</th>
             <th>Email</th>
-            <th>Product</th>
+            <th>Products</th>
           </tr>
         </thead>
         <tbody>
@@ -47,7 +47,7 @@ const UserListPage = () => {
               <td>{user.lastName}</td>
               <td>{user.phoneNumber}</td>
               <td>{user.email}</td>
-              <td>{user.feedbackOption || "No Feedback"}</td>
+              <td>{user.feedbackOptions?.join(", ") || "No Products Selected"}</td>
             </tr>
           ))}
         </tbody>
