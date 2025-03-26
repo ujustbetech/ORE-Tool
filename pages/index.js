@@ -11,7 +11,7 @@ const FeedbackForm = () => {
     lastName: "",
     phoneNumber: "",
     email: "",
-    feedbackOption: "",
+    feedbackOptions: [],
   });
 
   const options = [
@@ -22,15 +22,24 @@ const FeedbackForm = () => {
     "CKP Tel Poli - Puranpoli"
   ];
   
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleCheckboxChange = (e) => {
+    const { value, checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      feedbackOptions: checked
+        ? [...prevData.feedbackOptions, value]
+        : prevData.feedbackOptions.filter((option) => option !== value),
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.firstName || !formData.lastName || !formData.phoneNumber || !formData.email || !formData.feedbackOption) {
+    if (!formData.firstName || !formData.lastName || !formData.phoneNumber || !formData.email || formData.feedbackOptions.length === 0) {
       Swal.fire({
         icon: "warning",
         title: "Incomplete Form",
@@ -48,7 +57,7 @@ const FeedbackForm = () => {
         title: "Data Submitted!",
         text: "We thank you for connecting with us. We shall revert at the earliest",
       });
-      setFormData({ firstName: "", lastName: "", phoneNumber: "", email: "", feedbackOption: "" });
+      setFormData({ firstName: "", lastName: "", phoneNumber: "", email: "", feedbackOptions: [] });
     } catch (error) {
       console.error("Error submitting feedback:", error);
       Swal.fire({
@@ -62,9 +71,8 @@ const FeedbackForm = () => {
   return (
     <section className="feedbackContainer">
       <div className="feedback_logo">
-      <img src="/images/srenlogo.jpg" alt="Logo" className="sirenlogo"/>
+        <img src="/images/srenlogo.jpg" alt="Logo" className="sirenlogo"/>
         <img src="/ujustlogo.png" alt="Logo" />
-      
       </div>
       <div className="feedback-form-container">
         <h2 className="feedback-form-title">Data Capturing Tool</h2>
@@ -87,20 +95,27 @@ const FeedbackForm = () => {
           </div>
           <div className="input-group">
             <label>Product List</label>
-            <select name="feedbackOption" value={formData.feedbackOption} onChange={handleChange} required>
-              <option value="">Select an option</option>
+            <div className="checkbox-group">
               {options.map((option, index) => (
-                <option key={index} value={option}>{option}</option>
+                <div key={index} className="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id={`option-${index}`}
+                    name="feedbackOptions"
+                    value={option}
+                    checked={formData.feedbackOptions.includes(option)}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label htmlFor={`option-${index}`}>{option}</label>
+                </div>
               ))}
-            </select>
+            </div>
           </div>
           <button className="login-button" type="submit">Submit</button>
         </form>
-       
       </div>
       <h2 className="footers">Copyright @2025 | Powered by UJustBe</h2>
     </section>
-    
   );
 };
 
