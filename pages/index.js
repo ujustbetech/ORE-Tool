@@ -45,8 +45,8 @@ const FeedbackForm = () => {
 
       Swal.fire({
         icon: "success",
-        title: "Feedback Submitted!",
-        text: "Thank you for your valuable feedback.",
+        title: "Data Submitted!",
+        text: "We thank you for connecting with us. We shall revert at the earliest",
       });
       setFormData({ firstName: "", lastName: "", phoneNumber: "", email: "", feedbackOption: "" });
     } catch (error) {
