@@ -195,3 +195,75 @@ img.sirenlogo {
     font-size: 1rem;
   }
 }
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+
+  label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    input[type="checkbox"] {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #f16f06;
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s ease-in-out;
+
+      &:checked {
+        background-color: #f16f06;
+        border-color: #d26409;
+      }
+
+      &:checked::after {
+        content: "✔";
+        color: #fff;
+        font-size: 14px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    label {
+      font-size: 14px;
+      cursor: pointer;
+      transition: color 0.2s ease-in-out;
+    }
+
+    &:hover label {
+      color: #d26409;
+    }
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .checkbox-group {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
