@@ -10,17 +10,16 @@ const ExportFeedback = async () => {
 
     const feedbackData = querySnapshot.docs.map((docSnap) => {
       const userData = docSnap.data();
-
+    
       return {
         firstName: userData.firstName || "N/A",
         lastName: userData.lastName || "N/A",
         phoneNumber: userData.phoneNumber || "N/A",
         email: userData.email || "N/A",
-        feedbackOption: userData.feedbackOption || "No Feedback"
-          ? new Date(userData.registrationTime.seconds * 1000).toLocaleString()
-          : "N/A",
+        feedbackOption: userData.feedbackOption || "No Feedback",
       };
     });
+    
 
     if (feedbackData.length === 0) {
       Swal.fire({
